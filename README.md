@@ -43,7 +43,8 @@
 لا يتطلب المشروع أي تنصيب معقد، يمكنك تشغيله مباشرة:
 1. قم بتحميل الملف `index.html`.
 2. افتحه في أي متصفح (Chrome, Firefox, Safari).
-3. أو قم بزيارة الرابط المباشر: `[ضع رابط GitHub Pages الخاص بك هنا]`
+3. أو قم بزيارة الرابط المباشر:https://mrsha3ban.github.io/skills-analysis-platform
+4. 
 
 
 
