@@ -21,9 +21,12 @@
         body { font-family: 'Tajawal', sans-serif; background-color: #f1f5f9; scroll-behavior: smooth; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .active-tab { border-bottom: 4px solid #3b82f6; color: #3b82f6; font-weight: bold; }
+        .active-tab { background-color: #3b82f6 !important; color: white !important; font-weight: bold; }
         .option-btn { transition: all 0.2s; border: 1px solid #e2e8f0; }
         .option-btn:hover { transform: translateY(-2px); background-color: #eff6ff; border-color: #3b82f6; }
+        
+        /* تحسينات القائمة الجديدة */
+        .dropdown-menu { transition: all 0.3s ease; }
     </style>
 </head>
 <body>
@@ -31,14 +34,28 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex flex-col items-center text-center">
             <h1 class="text-2xl font-black text-slate-800 mb-4 tracking-tight">منصة إختبارات الموارد البشرية الشاملة</h1>
-            <nav class="flex flex-wrap justify-center gap-3 md:gap-6 text-slate-600 text-sm md:text-base">
-                <button onclick="showTab('mbti')" id="btn-mbti" class="tab-link active-tab pb-2 transition">الشخصية MBTI</button>
-                <button onclick="showTab('big5')" id="btn-big5" class="tab-link pb-2 transition">السمات Big 5</button>
-                <button onclick="showTab('intel')" id="btn-intel" class="tab-link pb-2 transition">الذكاءات</button>
-                <button onclick="showTab('logic')" id="btn-logic" class="tab-link pb-2 transition">المنطق</button>
-                <button onclick="showTab('sjt')" id="btn-sjt" class="tab-link pb-2 transition text-red-600 font-black">التصرف الإداري (SJT)</button>
-                <button onclick="showTab('typing')" id="btn-typing" class="tab-link pb-2 transition">الكتابة</button>
-            </nav>
+            
+            <div class="relative inline-block text-right w-full max-w-xs">
+                <div>
+                    <button type="button" onclick="toggleMenu()" class="inline-flex justify-between w-full rounded-xl border border-slate-300 shadow-sm px-4 py-3 bg-white text-sm font-bold text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="menu-button">
+                        اختر نوع الاختبار
+                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="dropdown-list" class="hidden origin-top-right absolute left-0 right-0 mt-2 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 overflow-hidden">
+                    <div class="py-1 flex flex-col">
+                        <button onclick="selectTest('mbti')" id="btn-mbti" class="tab-link text-right px-4 py-3 text-sm text-slate-700 hover:bg-blue-50 border-b border-slate-50 transition">الشخصية MBTI</button>
+                        <button onclick="selectTest('big5')" id="btn-big5" class="tab-link text-right px-4 py-3 text-sm text-slate-700 hover:bg-blue-50 border-b border-slate-50 transition">السمات Big 5</button>
+                        <button onclick="selectTest('intel')" id="btn-intel" class="tab-link text-right px-4 py-3 text-sm text-slate-700 hover:bg-blue-50 border-b border-slate-50 transition">الذكاءات المتعددة</button>
+                        <button onclick="selectTest('logic')" id="btn-logic" class="tab-link text-right px-4 py-3 text-sm text-slate-700 hover:bg-blue-50 border-b border-slate-50 transition">الاستدلال المنطقي</button>
+                        <button onclick="selectTest('sjt')" id="btn-sjt" class="tab-link text-right px-4 py-3 text-sm text-red-600 font-black hover:bg-red-50 border-b border-slate-50 transition">التصرف الإداري (SJT)</button>
+                        <button onclick="selectTest('typing')" id="btn-typing" class="tab-link text-right px-4 py-3 text-sm text-slate-700 hover:bg-blue-50 transition">اختبار الكتابة</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -52,26 +69,26 @@
     </main>
 
     <script>
-        // --- قواعد البيانات الثابتة ---
+        // دالة جديدة للتحكم في القائمة المنسدلة
+        function toggleMenu() {
+            const list = document.getElementById('dropdown-list');
+            list.classList.toggle('hidden');
+        }
+
+        // دالة لاختيار الاختبار وإغلاق القائمة
+        function selectTest(id) {
+            showTab(id);
+            document.getElementById('dropdown-list').classList.add('hidden');
+            // تحديث نص الزر ليعرف المستخدم ماذا اختار
+            const btnText = document.getElementById('btn-' + id).innerText;
+            document.getElementById('menu-button').firstChild.textContent = btnText + " ";
+        }
+
+        // --- قواعد البيانات الثابتة (كما هي دون أي تغيير) ---
         const MBTI_QUESTIONS = [["أتحمل الزحام والضوضاء", "أتجنب الضوضاء و أبحث عن الهدوء", "EI"], ["أتكلم أكثر و أنصت أقل", "أنصت أكثر و أتكلم أقل", "EI"], ["أحب أن أنقل حماستي للناس", "أحتفظ بحماسي داخل نفسي", "EI"], ["أفقد تركيزي بسهولة", "أستطيع أن أركز جيدا", "EI"], ["أتقابل مع الناس بسهولة", "أتحرك وأقابل الناس بحرص", "EI"], ["أتفوه بأشياء ثم أفكر لاحقا", "أفكر جيدا قبل أن أتكلم", "EI"], ["أكره أن أجلس بلا شئ أفعله", "أحتاج وقت مع نفسي", "EI"], ["أميل للكلام والعمل وسط جماعة", "أفضل التعامل مع أشخاص قليلين", "EI"], ["أحب أن أكون مركز إهتمام", "أسعد بوجودي خارج دائرة الضوء", "EI"], ["أتعلم أشياء جديدة من خلال التقليد", "أتعلم أشياء جديدة من خلال النظريات", "SN"], ["أقدر الطرق المعروفة", "أقدر الطرق الجديدة", "SN"], ["أركز أكثر على الخبرات السابقة", "أركز أكثر على الاحتمالات", "SN"], ["أميل لأن أكون واضحا ومحددا", "أميل لأن أكون خياليا", "SN"], ["أعتمد على خبراتي السابقة", "أعتمد على خيالي", "SN"], ["أحب العلاقات المتوقعة", "أقدر التغيرات في العلاقات", "SN"], ["أقدر الطرق التقليدية المضمونة", "أستخدم الحلول الجديدة المبتكرة", "SN"], ["أميل لإستخدام المناهج بدقة", "أميل لإستخدام طرق جديدة", "SN"], ["أقدر المنطق والحقائق", "أقدر الخيال والابتكار", "SN"], ["أسعى للحق", "أسعى للتناغم", "TF"], ["أقدر بعقلي أكثر من قلبي", "أقرر بقلبي أكثر من عقلي", "TF"], ["أتسائل عن نتائج الاخرين", "أقبل أراء الاخرين", "TF"], ["ألاحظ التفكير غير المنطقي", "ألاحظ إحتياجات الاخرين", "TF"], ["أقدر واختار الصراحة أكثر من اللباقة", "أقدر وأختار اللباقة أكثر من الصراحة", "TF"], ["أتعامل مع الناس بحزم", "أتعامل مع الناس بححب وحنان", "TF"], ["ألاحظ إيجابيات وسلبيات أي إختيار", "ألاحظ قيمة أي إختيار", "TF"], ["ناقد أرى عيوب الاخرين", "أظهر القبول", "TF"], ["المشاعر مقبولة فقط إذا كانت منطقية", "أي شعور مقبول", "TF"], ["أفضل أن أقرر لحياتي", "أتأقلم مع حياتي", "JP"], ["أفضل أن أعرف ما أنا مقبل عليه", "أفضل التأقلم مع الظروف الجديدة", "JP"], ["أشعر اني في حالة أفضل بعد أن أتخذ قرار", "أترك النهايات مفتوحة", "JP"], ["أسعد بإنجاز المهام", "أسعد بأن أبدأ الاشياء", "JP"], ["أحب أن أخطط وأنظم لحياتي", "أريد أن تكون حياتي مرنة جدا", "JP"], ["لا أحب المفاجات", "أستمتع بالمفاجأت", "JP"], ["أرى الوقت كمورد محدد", "أرى الوقت كمورد متجدد", "JP"], ["أفضل أن أشطب ما أنجزه", "أتجاهل قائمة ما يجب فعله", "JP"], ["أفضل أن أخطط لما أعمله أولا بأول", "أحب أن أقوم بالمهام بأي ترتيب", "JP"]];
         const BIG5_QUESTIONS = [{ text: "أقوم بإنجاز المهام والواجبات بدقة وإتقان", cat: "الضمير الحي" }, { text: "أحب التفاعل مع الناس والحديث مع الغرباء", cat: "الانبساط" }, { text: "أميل لمسامحة الآخرين والتعاون معهم", cat: "المقبولية" }, { text: "أهتم جداً بالأفكار الفلسفية والخيالية والمعقدة", cat: "الانفتاح" }, { text: "أشعر بالقلق والتوتر بسهولة عند ضغط العمل", cat: "الاتزان" }, { text: "أحافظ على أغراضي ومنظم جداً في عملي", cat: "الضمير الحي" }, { text: "أشعر بالحيوية والنشاط في التجمعات الكبيرة", cat: "الانبساط" }, { text: "أثق في نوايا الناس من حولي", cat: "المقبولية" }, { text: "أستمتع بتجربة الأطعمة والأنشطة الجديدة والغريبة", cat: "الانفتاح" }, { text: "أفقد أعصابي أو أحزن بسرعة عند وقوع خطأ", cat: "الاتزان" }, { text: "لا أترك عملي حتى أتأكد من إنهاء كل تفاصيله", cat: "الضمير الحي" }, { text: "أفضل العمل الجماعي على العمل منفرداً", cat: "الانبساط" }, { text: "أحرص على ألا أجرح مشاعر الآخرين بكلامي", cat: "المقبولية" }, { text: "أقدر الفنون والموسيقى والجمال بشكل عميق", cat: "الانفتاح" }, { text: "أستطيع التحكم في مشاعري تحت الضغط الشديد", cat: "الاتزان" }, { text: "أضع خططاً واضحة ليومي وألتزم بها", cat: "الضمير الحي" }, { text: "أنا شخص اجتماعي وأحب أن أكون مركز الاهتمام", cat: "الانبساط" }, { text: "أميل لمساعدة الآخرين حتى لو على حساب وقتي", cat: "المقبولية" }, { text: "لدي خيال واسع وأفكر في احتمالات كثيرة", cat: "الانفتاح" }, { text: "نادراً ما أشعر بالاكتئاب أو الإحباط", cat: "الاتزان" }];
         const LOGIC_QUESTIONS = [{ q: "إذا كان ثمن 3 أقلام هو 15 ريالاً، فكم ثمن 7 أقلام؟", options: ["30", "35", "40", "45"], correct: 1, type: "عددي" }, { q: "أكمل المتسلسلة: 2، 4، 8، 16، ...", options: ["20", "24", "32", "64"], correct: 2, type: "عددي" }, { q: "جميع الموظفين في الشركة (أ) يرتدون زياً أزرق. 'خالد' موظف في الشركة (أ). ما هي النتيجة المؤكدة؟", options: ["خالد يحب اللون الأزرق", "خالد يرتدي زياً أزرق", "كل من يرتدي الأزرق موظف في الشركة", "خالد يرتدي زياً أحمراً"], correct: 1, type: "لفظي" }, { q: "سعر منتج 200 ريال، حصل عليه خصم 20%. ما هو سعره الجديد؟", options: ["160", "180", "150", "140"], correct: 0, type: "عددي" }, { q: "كلمة 'إهمال' بالنسبة لـ 'فشل' مثل كلمة 'اجتهاد' بالنسبة لـ:", options: ["حظ", "نجاح", "تعب", "انتظار"], correct: 1, type: "لفظي" }, { q: "ما هو الرقم الذي يكمل النمط: 1، 3، 6، 10، 15، ...", options: ["18", "20", "21", "25"], correct: 2, type: "عددي" }, { q: "إذا كان 'عمر' أطول من 'سعيد'، و'سعيد' أطول من 'فهد'، فمن هو الأقصر؟", options: ["عمر", "سعيد", "فهد", "لا يمكن التحديد"], correct: 2, type: "لفظي" }, { q: "سيارة تسير بسرعة 60 كم/ساعة، كم تقطع في ساعتين ونصف؟", options: ["120 كم", "150 كم", "180 كم", "200 كم"], correct: 1, type: "عددي" }, { q: "أي الكلمات التالية هي الكلمة الشاذة: (تفاح، برتقال، جزر، عنب)؟", options: ["تفاح", "برتقال", "جزر", "عنب"], correct: 2, type: "لفظي" }, { q: "المعدن بالنسبة لـ 'الصلابة' مثل السائل بالنسبة لـ:", options: ["البرودة", "الجريان", "اللون", "الوزن"], correct: 1, type: "لفظي" }];
-        
-        // --- بيانات SJT (تمت إضافة 5 أسئلة جديدة ليصبح الإجمالي 10) ---
-        const SJT_QUESTIONS = [
-            { scenario: "لاحظت أن زميلك المقرب في العمل يرتكب خطأً متكرراً في التقارير قد يؤثر على نتائج القسم، ماذا تفعل؟", options: [{ text: "تتجاهل الأمر حفاظاً على علاقتك به.", score: 0 }, { text: "تتحدث معه بشكل خاص، توضح له الخطأ، وتعرض عليه المساعدة.", score: 10 }, { text: "تبلغ المدير فوراً لضمان عدم تحميلك مسؤولية أخطائه.", score: 5 }] },
-            { scenario: "لديك موعد نهائي لتسليم مشروع غداً، وفي نهاية اليوم طلب منك مديرك بشكل عاجل تحضير عرض تقديم لعميل مهم. كيف تتصرف؟", options: [{ text: "تعتذر للمدير لأنك مشغول بالمشروع.", score: 0 }, { text: "توافق فوراً وتعمل وقتاً إضافياً لتنهي المهمتين.", score: 10 }, { text: "تطلب من المدير مساعدتك في ترتيب الأولويات لضمان الدقة.", score: 8 }] },
-            { scenario: "قام عميل بالاتصال بك وهو غاضب جداً بسبب تأخر الخدمة، وبدأ في التحدث بلهجة حادة. كيف تتعامل معه؟", options: [{ text: "تطلب منه الهدوء وتخبره أن الصراخ لن يحل المشكلة.", score: 2 }, { text: "تستمع له بهدوء، تعتذر، وتعده بمتابعة الأمر فوراً.", score: 10 }, { text: "تحوله فوراً لمديرك لأنك غير مسؤول.", score: 4 }] },
-            { scenario: "اكتشفت بعد إرسال بريد رسمي لمدير الإدارة أنك أرفقت ملفاً خاطئاً يحتوي على معلومات غير دقيقة. ماذا تفعل؟", options: [{ text: "تنتظر لترى إذا كان سيلحظ الخطأ.", score: 0 }, { text: "ترسل بريداً ثانياً فوراً بالملف الصحيح مع اعتذار.", score: 10 }, { text: "تحاول حذف الرسالة من بريده قبل أن يراها.", score: 3 }] },
-            { scenario: "أثناء اجتماع الفريق، قام أحد الزملاء بانتقاد فكرتك بشكل علني وقاسٍ. كيف ترد؟", options: [{ text: "ترد عليه بنفس الأسلوب لتدافع عن كرامتك.", score: 0 }, { text: "تطلب منه توضيح نقاط النقد بشكل موضوعي وتناقشه بهدوء.", score: 10 }, { text: "تنسحب من النقاش وتشتكيه للمدير بعد الاجتماع.", score: 4 }] },
-            // الأسئلة الجديدة (6-10)
-            { scenario: "وجدت زميلين في مكتبك يتشاجران بصوت عالٍ حول تقسيم المهام، مما أدى لتعطل العمل. ما هو موقفك؟", options: [{ text: "تتركهما وشأنهما وتستمر في عملك، فالأمر لا يخصك.", score: 0 }, { text: "تحاول التدخل لتهدئة الموقف واقتراح حل وسط يرضي الطرفين.", score: 10 }, { text: "تذهب فوراً لإبلاغ الأمن أو الموارد البشرية لفض النزاع.", score: 6 }] },
-            { scenario: "اكتشفت بالصدفة أن أحد زملائك يستخدم موارد الشركة (مثل الطابعة أو الأدوات) لأغراض تجارية خاصة به خارج العمل. ماذا تفعل؟", options: [{ text: "تخبره بأنك اكتشفت الأمر وتنصحه بالتوقف فوراً لأن ذلك يخالف السياسات.", score: 10 }, { text: "تتجاهل الأمر تماماً، فكل شخص حر في تصرفاته.", score: 0 }, { text: "تذهب للمدير سراً وتبلغه بما رأيت دون مواجهة الزميل.", score: 7 }] },
-            { scenario: "فشلت في إنجاز مهمة هامة في وقتها المحدد مما تسبب في إحراج لفريقك أمام الإدارة. كيف تتعامل مع الموقف؟", options: [{ text: "تبحث عن أعذار خارجية (مثل ضغط العمل أو ضعف التنسيق) لتبرير التأخير.", score: 2 }, { text: "تتحمل المسؤولية كاملة، وتعتذر للفريق، وتقدم خطة لتعويض التأخير فوراً.", score: 10 }, { text: "تلتزم الصمت وتأمل أن يمر الموقف دون أن يلاحظ أحد تقصيرك.", score: 0 }] },
-            { scenario: "طلب منك المدير القيام بمهمة تشعر أنها غير أخلاقية أو تتلاعب بالبيانات لإظهار نتائج أفضل للقسم. ماذا تفعل؟", options: [{ text: "تنفذ المهمة فوراً، فالمدير هو المسؤول عن القرار النهائي.", score: 0 }, { text: "تناقش المدير بهدوء حول مخاوفك المهنية وتقترح طريقة قانونية وصادقة لعرض النتائج.", score: 10 }, { text: "ترفض المهمة بحدة وتتهم المدير بالفساد أمام الزملاء.", score: 3 }] },
-            { scenario: "تم تعيينك قائداً لفريق عمل جديد، ووجدت أن الأعضاء لا يثقون ببعضهم البعض والإنتاجية ضعيفة. ما هي خطوتك الأولى؟", options: [{ text: "تفرض قواعد صارمة وعقوبات على أي شخص لا يلتزم بالإنتاجية المطلوبة.", score: 3 }, { text: "تعقد اجتماعاً مفتوحاً لبناء الثقة، وتستمع لمخاوف الجميع، وتحدد أهدافاً مشتركة واضحة.", score: 10 }, { text: "تقوم بتغيير معظم أعضاء الفريق واستبدالهم بأشخاص آخرين تثق بهم.", score: 0 }] }
-        ];
-
+        const SJT_QUESTIONS = [{ scenario: "لاحظت أن زميلك المقرب في العمل يرتكب خطأً متكرراً في التقارير قد يؤثر على نتائج القسم، ماذا تفعل؟", options: [{ text: "تتجاهل الأمر حفاظاً على علاقتك به.", score: 0 }, { text: "تتحدث معه بشكل خاص، توضح له الخطأ، وتعرض عليه المساعدة.", score: 10 }, { text: "تبلغ المدير فوراً لضمان عدم تحميلك مسؤولية أخطائه.", score: 5 }] }, { scenario: "لديك موعد نهائي لتسليم مشروع غداً، وفي نهاية اليوم طلب منك مديرك بشكل عاجل تحضير عرض تقديم لعميل مهم. كيف تتصرف؟", options: [{ text: "تعتذر للمدير لأنك مشغول بالمشروع.", score: 0 }, { text: "توافق فوراً وتعمل وقتاً إضافياً لتنهي المهمتين.", score: 10 }, { text: "تطلب من المدير مساعدتك في ترتيب الأولويات لضمان الدقة.", score: 8 }] }, { scenario: "قام عميل بالاتصال بك وهو غاضب جداً بسبب تأخر الخدمة، وبدأ في التحدث بلهجة حادة. كيف تتعامل معه؟", options: [{ text: "تطلب منه الهدوء وتخبره أن الصراخ لن يحل المشكلة.", score: 2 }, { text: "تستمع له بهدوء، تعتذر، وتعده بمتابعة الأمر فوراً.", score: 10 }, { text: "تحوله فوراً لمديرك لأنك غير مسؤول.", score: 4 }] }, { scenario: "اكتشفت بعد إرسال بريد رسمي لمدير الإدارة أنك أرفقت ملفاً خاطئاً يحتوي على معلومات غير دقيقة. ماذا تفعل؟", options: [{ text: "تنتظر لترى إذا كان سيلحظ الخطأ.", score: 0 }, { text: "ترسل بريداً ثانياً فوراً بالملف الصحيح مع اعتذار.", score: 10 }, { text: "تحاول حذف الرسالة من بريده قبل أن يراها.", score: 3 }] }, { scenario: "أثناء اجتماع الفريق، قام أحد الزملاء بانتقاد فكرتك بشكل علني وقاسٍ. كيف ترد؟", options: [{ text: "ترد عليه بنفس الأسلوب لتدافع عن كرامتك.", score: 0 }, { text: "تطلب منه توضيح نقاط النقد بشكل موضوعي وتناقشه بهدوء.", score: 10 }, { text: "تنسحب من النقاش وتشتكيه للمدير بعد الاجتماع.", score: 4 }] }, { scenario: "وجدت زميلين في مكتبك يتشاجران بصوت عالٍ حول تقسيم المهام، مما أدى لتعطل العمل. ما هو موقفك؟", options: [{ text: "تتركهما وشأنهما وتستمر في عملك، فالأمر لا يخصك.", score: 0 }, { text: "تحاول التدخل لتهدئة الموقف واقتراح حل وسط يرضي الطرفين.", score: 10 }, { text: "تذهب فوراً لإبلاغ الأمن أو الموارد البشرية لفض النزاع.", score: 6 }] }, { scenario: "اكتشفت بالصدفة أن أحد زملائك يستخدم موارد الشركة (مثل الطابعة أو الأدوات) لأغراض تجارية خاصة به خارج العمل. ماذا تفعل؟", options: [{ text: "تخبره بأنك اكتشفت الأمر وتنصحه بالتوقف فوراً لأن ذلك يخالف السياسات.", score: 10 }, { text: "تتجاهل الأمر تماماً، فكل شخص حر في تصرفاته.", score: 0 }, { text: "تذهب للمدير سراً وتبلغه بما رأيت دون مواجهة الزميل.", score: 7 }] }, { scenario: "فشلت في إنجاز مهمة هامة في وقتها المحدد مما تسبب في إحراج لفريقك أمام الإدارة. كيف تتعامل مع الموقف؟", options: [{ text: "تبحث عن أعذار خارجية (مثل ضغط العمل أو ضعف التنسيق) لتبرير التأخير.", score: 2 }, { text: "تتحمل المسؤولية كاملة، وتعتذر للفريق، وتقدم خطة لتعويض التأخير فوراً.", score: 10 }, { text: "تلتزم الصمت وتأمل أن يمر الموقف دون أن يلاحظ أحد تقصيرك.", score: 0 }] }, { scenario: "طلب منك المدير القيام بمهمة تشعر أنها غير أخلاقية أو تتلاعب بالبيانات لإظهار نتائج أفضل للقسم. ماذا تفعل؟", options: [{ text: "تنفذ المهمة فوراً، فالمدير هو المسؤول عن القرار النهائي.", score: 0 }, { text: "تناقش المدير بهدوء حول مخاوفك المهنية وتقترح طريقة قانونية وصادقة لعرض النتائج.", score: 10 }, { text: "ترفض المهمة بحدة وتتهم المدير بالفساد أمام الزملاء.", score: 3 }] }, { scenario: "تم تعيينك قائداً لفريق عمل جديد، ووجدت أن الأعضاء لا يثقون ببعضهم البعض والإنتاجية ضعيفة. ما هي خطوتك الأولى؟", options: [{ text: "تفرض قواعد صارمة وعقوبات على أي شخص لا يلتزم بالإنتاجية المطلوبة.", score: 3 }, { text: "تعقد اجتماعاً مفتوحاً لبناء الثقة، وتستمع لمخاوف الجميع، وتحدد أهدافاً مشتركة واضحة.", score: 10 }, { text: "تقوم بتغيير معظم أعضاء الفريق واستبدالهم بأشخاص آخرين تثق بهم.", score: 0 }] }];
         const INTEL_QUESTIONS = [{ text: "يسهل علي تأليف القصص", cat: "لغوي" }, { text: "أنصت إلى الكلمات التي يستخدمها الناس", cat: "لغوي" }, { text: "استمتع بحل الكلمات المتقاطعة", cat: "لغوي" }, { text: "يسهل علي تذكر أسماء الناس", cat: "لغوي" }, { text: "يمكنني اقناع الآخرين", cat: "لغوي" }, { text: "أستمتع بالألعاب المنطقية", cat: "منطقي" }, { text: "أستطيع الحساب في ذهني", cat: "منطقي" }, { text: "أحب تنظيم الأشياء في فئات", cat: "منطقي" }, { text: "أهتم بالاكتشافات العلمية", cat: "منطقي" }, { text: "أستمتع بحل المشكلات المعقدة", cat: "منطقي" }, { text: "أحتاج دائماً للنقر بأصابعي", cat: "موسيقي" }, { text: "أستطيع تمييز الإيقاعات", cat: "موسيقي" }, { text: "أحب الاستماع للموسيقى", cat: "موسيقي" }, { text: "يمكنني العزف أو الغناء", cat: "موسيقي" }, { text: "أتذكر ألحان الأغاني", cat: "موسيقي" }, { text: "أستمتع بالأنشطة البدنية", cat: "حركي" }, { text: "أجد صعوبة في الجلوس طويلاً", cat: "حركي" }, { text: "أحب العمل بيدي", cat: "حركي" }, { text: "أستخدم لغة جسدي بكثرة", cat: "حركي" }, { text: "أفضل ممارسة الأشياء بنفسي", cat: "حركي" }, { text: "أحب رسم المخططات", cat: "بصري" }, { text: "أستمتع بالألغاز البصرية", cat: "بصري" }, { text: "تخيل الأشياء والمباني", cat: "بصري" }, { text: "أحب استخدام الألوان", cat: "بصري" }, { text: "أستطيع قراءة الخرائط", cat: "بصري" }, { text: "أفضل العمل في مجموعات", cat: "اجتماعي" }, { text: "يلجأ إليّ أصدقائي للنصيحة", cat: "اجتماعي" }, { text: "أستطيع قراءة مشاعر الآخرين", cat: "اجتماعي" }, { text: "أحب تكوين صداقات جديدة", cat: "اجتماعي" }, { text: "أستمتع بتعليم الآخرين", cat: "اجتماعي" }, { text: "أفضل العمل بمفردي", cat: "ذاتي" }, { text: "أعرف نقاط قوتي وضعفي", cat: "ذاتي" }, { text: "أفكر في أهدافي المستقبلية", cat: "ذاتي" }, { text: "أحب تدوين يومياتي", cat: "ذاتي" }, { text: "أعتمد على حدسي", cat: "ذاتي" }];
         const TYPING_STAGES = [{ lang: 'العربية', text: "تعد تقنية المعلومات الركيزة الأساسية في بناء المدن الذكية، حيث تساهم في تحسين جودة الحياة وتسهيل الخدمات الحكومية من خلال الربط الرقمي والذكاء الاصطناعي الذي يخدم كافة أفراد المجتمع بفعالية.", dir: 'rtl' }, { lang: 'English', text: "Digital transformation is reshaping the global economy by creating new opportunities for innovation and growth. Mastering keyboard skills is essential for productivity in today's fast-paced environment.", dir: 'ltr' }];
 
@@ -134,7 +151,7 @@
             document.getElementById('logic-card').innerHTML = `<div class="text-center py-6"><h3 class="text-2xl font-black mb-6">نتيجة المنطق</h3><div class="inline-block p-10 rounded-full border-8 border-orange-500 text-5xl font-black text-orange-600 mb-8">${score}%</div><button onclick="location.reload()" class="mt-8 block w-full bg-orange-600 text-white p-3 rounded-full font-bold">إعادة</button></div>`;
         }
 
-        // --- منطق عرض SJT (10 أسئلة) ---
+        // --- منطق عرض SJT ---
         function renderSJT() {
             const container = document.getElementById('sjt-card');
             if (sjtIdx < SJT_QUESTIONS.length) {
@@ -162,15 +179,7 @@
             const maxScore = SJT_QUESTIONS.length * 10;
             const percentage = Math.round((sjtTotalScore / maxScore) * 100);
             let feedback = percentage >= 85 ? "رائع! لديك نضج إداري وحكمة في اتخاذ القرارات وحل النزاعات." : percentage >= 60 ? "أداؤك جيد جداً، أنت تمتلك مهارات قيادية وتواصل فعالة مع الفريق." : "تحتاج للعمل أكثر على مهارات إدارة المواقف الضابطة والذكاء الاجتماعي المهني.";
-            
-            document.getElementById('sjt-card').innerHTML = `
-                <div class="text-center py-6">
-                    <h3 class="text-2xl font-black text-slate-800 mb-6">نتيجة التصرف الإداري الشاملة</h3>
-                    <div class="text-6xl font-black text-red-600 mb-4">${percentage}%</div>
-                    <p class="text-slate-600 font-bold mb-8 px-4 leading-relaxed">${feedback}</p>
-                    <button onclick="location.reload()" class="bg-red-600 text-white px-10 py-3 rounded-full font-bold shadow-lg">إعادة الاختبار</button>
-                </div>
-            `;
+            document.getElementById('sjt-card').innerHTML = `<div class="text-center py-6"><h3 class="text-2xl font-black text-slate-800 mb-6">نتيجة التصرف الإداري الشاملة</h3><div class="text-6xl font-black text-red-600 mb-4">${percentage}%</div><p class="text-slate-600 font-bold mb-8 px-4 leading-relaxed">${feedback}</p><button onclick="location.reload()" class="bg-red-600 text-white px-10 py-3 rounded-full font-bold shadow-lg">إعادة الاختبار</button></div>`;
         }
 
         // --- منطق عرض الذكاءات ---
@@ -199,7 +208,7 @@
         function processTyping(el) {
             if (!timerActive) {
                 timerActive = true; startTime = new Date();
-                typingTimerInterval = setInterval(() => { timeLeft--; document.getElementById('timer').innerText = `الوقت: ${timeLeft}s`; if(timeLeft<=0) finishTypingStage(); }, 1000);
+                typingTimerInterval = setInterval(() => { timeLeft--; if(document.getElementById('timer')) document.getElementById('timer').innerText = `الوقت: ${timeLeft}s`; if(timeLeft<=0) finishTypingStage(); }, 1000);
             }
             if (el.value.trim() === TYPING_STAGES[typingIdx].text.trim()) finishTypingStage();
         }
