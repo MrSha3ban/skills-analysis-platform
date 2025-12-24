@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<meta property="og:title" content="منصة تحليل الشخصية والمهارات">
+<meta property="og:description" content="اكتشف نمط شخصيتك MBTI، ذكاءاتك المتعددة، وقس سرعة كتابتك في مكان واحد.">
+<meta property="og:url" content="https://mrsha3ban.github.io/skills-analysis-platform/">
+<meta property="og:type" content="website">
+
+<meta property="og:image" content="https://github.com/MrSha3ban/skills-analysis-platform/blob/main/banner.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="منصة تحليل الشخصية والمهارات">
+<meta name="twitter:description" content="اكتشف نمط شخصيتك MBTI، ذكاءاتك المتعددة، وقس سرعة كتابتك في مكان واحد.">
+<meta name="twitter:image" content="https://github.com/MrSha3ban/skills-analysis-platform/blob/main/banner.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنصة المتكاملة لتقييم الكفاءات - HR Expert Edition</title>
+    <title>منصة تقييم الكفاءات الشاملة -3arapy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -13,196 +24,78 @@
         .active-tab { border-bottom: 4px solid #3b82f6; color: #3b82f6; font-weight: bold; }
         .option-btn { transition: all 0.2s; border: 1px solid #e2e8f0; }
         .option-btn:hover { transform: translateY(-2px); background-color: #eff6ff; border-color: #3b82f6; }
-        .logic-btn:hover { transform: scale(1.05); background-color: #f97316; }
     </style>
 </head>
 <body>
 
     <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex flex-col md:row justify-between items-center text-center">
-            <h1 class="text-2xl font-black text-slate-800 tracking-tight mb-2">منصة تقييم الكفاءات المتكاملة</h1>
-            <nav class="flex flex-wrap justify-center gap-4 text-slate-600">
-                <button onclick="showTab('mbti')" id="btn-mbti" class="tab-link active-tab pb-2 transition">الشخصية (MBTI)</button>
-                <button onclick="showTab('big5')" id="btn-big5" class="tab-link pb-2 transition">السمات الخمس (Big 5)</button>
+        <div class="container mx-auto px-4 py-4 flex flex-col items-center text-center">
+            <h1 class="text-2xl font-black text-slate-800 mb-4 tracking-tight">منصة إختبارات الموارد البشرية الشاملة</h1>
+            <nav class="flex flex-wrap justify-center gap-3 md:gap-6 text-slate-600 text-sm md:text-base">
+                <button onclick="showTab('mbti')" id="btn-mbti" class="tab-link active-tab pb-2 transition">الشخصية MBTI</button>
+                <button onclick="showTab('big5')" id="btn-big5" class="tab-link pb-2 transition">السمات Big 5</button>
                 <button onclick="showTab('intel')" id="btn-intel" class="tab-link pb-2 transition">الذكاءات</button>
-                <button onclick="showTab('logic')" id="btn-logic" class="tab-link pb-2 transition text-orange-600 font-bold">الاستدلال المنطقي</button>
-                <button onclick="showTab('typing')" id="btn-typing" class="tab-link pb-2 transition">اختبار الكتابة</button>
+                <button onclick="showTab('logic')" id="btn-logic" class="tab-link pb-2 transition">المنطق</button>
+                <button onclick="showTab('sjt')" id="btn-sjt" class="tab-link pb-2 transition text-red-600 font-black">التصرف الإداري (SJT)</button>
+                <button onclick="showTab('typing')" id="btn-typing" class="tab-link pb-2 transition">الكتابة</button>
             </nav>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        <div id="mbti" class="tab-content active w-full max-w-2xl mx-auto">
-            <div id="mbti-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-200"></div>
-        </div>
-
-        <div id="big5" class="tab-content w-full max-w-2xl mx-auto">
-            <div id="big5-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-violet-600"></div>
-        </div>
-
-        <div id="intel" class="tab-content w-full max-w-2xl mx-auto">
-            <div id="intel-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-emerald-500"></div>
-        </div>
-
-        <div id="logic" class="tab-content w-full max-w-2xl mx-auto">
-            <div id="logic-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-orange-500"></div>
-        </div>
-
-        <div id="typing" class="tab-content w-full max-w-3xl mx-auto">
-            <div id="typing-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-l-8 border-indigo-600"></div>
-        </div>
+        <div id="mbti" class="tab-content active w-full max-w-2xl mx-auto"><div id="mbti-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-200"></div></div>
+        <div id="big5" class="tab-content w-full max-w-2xl mx-auto"><div id="big5-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-violet-600"></div></div>
+        <div id="intel" class="tab-content w-full max-w-2xl mx-auto"><div id="intel-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-emerald-500"></div></div>
+        <div id="logic" class="tab-content w-full max-w-2xl mx-auto"><div id="logic-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-orange-500"></div></div>
+        <div id="sjt" class="tab-content w-full max-w-2xl mx-auto"><div id="sjt-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-t-8 border-red-600"></div></div>
+        <div id="typing" class="tab-content w-full max-w-3xl mx-auto"><div id="typing-card" class="bg-white p-6 md:p-10 rounded-3xl shadow-xl border-l-8 border-indigo-600"></div></div>
     </main>
 
     <script>
-        // 1. بيانات MBTI (كما هي)
-        const MBTI_QUESTIONS = [
-            ["أتحمل الزحام والضوضاء", "أتجنب الضوضاء و أبحث عن الهدوء", "EI"],
-            ["أتكلم أكثر و أنصت أقل", "أنصت أكثر و أتكلم أقل", "EI"],
-            ["أحب أن أنقل حماستي للناس", "أحتفظ بحماسي داخل نفسي", "EI"],
-            ["أفقد تركيزي بسهولة", "أستطيع أن أركز جيدا", "EI"],
-            ["أتقابل مع الناس بسهولة وأشترك في الكثير من الانشطة", "أتحرك وأقابل الناس بحرص وأركز على بعض الانشطة", "EI"],
-            ["أتفوه بأشياء ثم أفكر لاحقا", "أفكر جيدا قبل أن أتكلم", "EI"],
-            ["أكره أن أجلس بلا شئ أفعله", "أحتاج وقت مع نفسي لأعيد شحن نفسي", "EI"],
-            ["أميل للكلام والعمل وسط جماعة", "أفضل التعامل مع أشخاص قليلين وأن أعمل منفردا", "EI"],
-            ["أحب أن أكون مركز إهتمام", "أسعد بوجودي خارج دائرة الضوء", "EI"],
-            ["أتعلم أشياء جديدة من خلال التقليد والملاحظة", "أتعلم أشياء جديدة من خلال المبادئ والنظريات", "SN"],
-            ["أقدر الطرق المعروفة لعمل الاشياء", "أقدر الطرق الجديدة والمبتكرة لعمل الاشياء", "SN"],
-            ["أركز أكثر على الخبرات السابقة", "أركز أكثر على الاحتمالات", "SN"],
-            ["أميل لأن أكون واضحا ومحددا وأعطي مواصفات دقيقة", "أميل لأن أكون خياليا و عاما وأعطي أمثلة ومقارنات", "SN"],
-            ["أعتمد على خبراتي السابقة", "أعتمد على خيالي", "SN"],
-            ["أحب العلاقات المتوقعة", "أقدر التغيرات في العلاقات", "SN"],
-            ["أقدر الطرق التقليدية المضمونة لحل المشاكل", "أستخدم الحلول الجديدة المبتكرة", "SN"],
-            ["أميل لإستخدام المناهج بدقة", "أميل لإستخدام طرق جديدة", "SN"],
-            ["أقدر المنطق والحقائق", "أقدر الخيال والابتكار", "SN"],
-            ["أسعى للحق", "أسعى للتناغم", "TF"],
-            ["أقدر بعقلي أكثر من قلبي", "أقرر بقلبي أكثر من عقلي", "TF"],
-            ["أتسائل عن نتائج الاخرين (لانهم قد يكونوا مخطئين)", "أقبل أراء الاخرين لانهم بشر ويجب أن نسمعهم", "TF"],
-            ["ألاحظ التفكير غير المنطقي", "ألاحظ إحتياجات الاخرين", "TF"],
-            ["أقدر واختار الصراحة أكثر من اللباقة", "أقدر وأختار اللباقة أكثر من الصراحة", "TF"],
-            ["أتعامل مع الناس بحزم عندما يحتاجون", "أتعامل مع الناس بححب وحنان", "TF"],
-            ["ألاحظ إيجابيات وسلبيات أي إختيار", "ألاحظ قيمة أي إختيار وتأثيره على البشر", "TF"],
-            ["ناقد أرى عيوب الاخرين", "أظهر القبول وأحب أن أرضي الاخرين", "TF"],
-            ["المشاعر مقبولة فقط إذا كانت منطقية", "أي شعور مقبول", "TF"],
-            ["أفضل أن أقرر لحياتي و أفرض إرادتي عليها", "أتأقلم مع حياتي أينما تأتي بي الظروف", "JP"],
-            ["أفضل أن أعرف ما أنا مقبل عليه مسبقا", "أفضل التأقلم مع الظروف الجديدة", "JP"],
-            ["أشعر اني في حالة أفضل بعد أن أتخذ قرار", "أترك النهايات مفتوحة (لا أكمل الكثير من الاعمال)", "JP"],
-            ["أسعد بإنجاز المهام والانتهاء منها", "أسعد بأن أبدأ الاشياء", "JP"],
-            ["أحب أن أخطط وأنظم لحياتي بوضوح وتفاصيل", "أريد أن تكون حياتي مرنة جدا", "JP"],
-            ["لا أحب المفاجات وأفضل التنبيهات المسبقة والمتوقعة", "أستمتع بالمفاجأت والتغيرات في اللحظة الاخيرة", "JP"],
-            ["أرى الوقت كمورد محدد وألتزم بمواعيد التسليم", "أرى الوقت كمورد متجدد وأحب مرونة مواعيد التسليم", "JP"],
-            ["أفضل أن أشطب ما أنجزه من قائمة ما يجب فعله", "أتجاهل قائمة ما يجب فعله اليوم حتى إن كتبتها", "JP"],
-            ["أفضل أن أخطط لما أعمله أولا بأول", "أحب أن أقوم بالمهام واحدة تلو الاخرى بأي ترتيب تظهر به", "JP"]
+        // --- قواعد البيانات الثابتة ---
+        const MBTI_QUESTIONS = [["أتحمل الزحام والضوضاء", "أتجنب الضوضاء و أبحث عن الهدوء", "EI"], ["أتكلم أكثر و أنصت أقل", "أنصت أكثر و أتكلم أقل", "EI"], ["أحب أن أنقل حماستي للناس", "أحتفظ بحماسي داخل نفسي", "EI"], ["أفقد تركيزي بسهولة", "أستطيع أن أركز جيدا", "EI"], ["أتقابل مع الناس بسهولة", "أتحرك وأقابل الناس بحرص", "EI"], ["أتفوه بأشياء ثم أفكر لاحقا", "أفكر جيدا قبل أن أتكلم", "EI"], ["أكره أن أجلس بلا شئ أفعله", "أحتاج وقت مع نفسي", "EI"], ["أميل للكلام والعمل وسط جماعة", "أفضل التعامل مع أشخاص قليلين", "EI"], ["أحب أن أكون مركز إهتمام", "أسعد بوجودي خارج دائرة الضوء", "EI"], ["أتعلم أشياء جديدة من خلال التقليد", "أتعلم أشياء جديدة من خلال النظريات", "SN"], ["أقدر الطرق المعروفة", "أقدر الطرق الجديدة", "SN"], ["أركز أكثر على الخبرات السابقة", "أركز أكثر على الاحتمالات", "SN"], ["أميل لأن أكون واضحا ومحددا", "أميل لأن أكون خياليا", "SN"], ["أعتمد على خبراتي السابقة", "أعتمد على خيالي", "SN"], ["أحب العلاقات المتوقعة", "أقدر التغيرات في العلاقات", "SN"], ["أقدر الطرق التقليدية المضمونة", "أستخدم الحلول الجديدة المبتكرة", "SN"], ["أميل لإستخدام المناهج بدقة", "أميل لإستخدام طرق جديدة", "SN"], ["أقدر المنطق والحقائق", "أقدر الخيال والابتكار", "SN"], ["أسعى للحق", "أسعى للتناغم", "TF"], ["أقدر بعقلي أكثر من قلبي", "أقرر بقلبي أكثر من عقلي", "TF"], ["أتسائل عن نتائج الاخرين", "أقبل أراء الاخرين", "TF"], ["ألاحظ التفكير غير المنطقي", "ألاحظ إحتياجات الاخرين", "TF"], ["أقدر واختار الصراحة أكثر من اللباقة", "أقدر وأختار اللباقة أكثر من الصراحة", "TF"], ["أتعامل مع الناس بحزم", "أتعامل مع الناس بححب وحنان", "TF"], ["ألاحظ إيجابيات وسلبيات أي إختيار", "ألاحظ قيمة أي إختيار", "TF"], ["ناقد أرى عيوب الاخرين", "أظهر القبول", "TF"], ["المشاعر مقبولة فقط إذا كانت منطقية", "أي شعور مقبول", "TF"], ["أفضل أن أقرر لحياتي", "أتأقلم مع حياتي", "JP"], ["أفضل أن أعرف ما أنا مقبل عليه", "أفضل التأقلم مع الظروف الجديدة", "JP"], ["أشعر اني في حالة أفضل بعد أن أتخذ قرار", "أترك النهايات مفتوحة", "JP"], ["أسعد بإنجاز المهام", "أسعد بأن أبدأ الاشياء", "JP"], ["أحب أن أخطط وأنظم لحياتي", "أريد أن تكون حياتي مرنة جدا", "JP"], ["لا أحب المفاجات", "أستمتع بالمفاجأت", "JP"], ["أرى الوقت كمورد محدد", "أرى الوقت كمورد متجدد", "JP"], ["أفضل أن أشطب ما أنجزه", "أتجاهل قائمة ما يجب فعله", "JP"], ["أفضل أن أخطط لما أعمله أولا بأول", "أحب أن أقوم بالمهام بأي ترتيب", "JP"]];
+        const BIG5_QUESTIONS = [{ text: "أقوم بإنجاز المهام والواجبات بدقة وإتقان", cat: "الضمير الحي" }, { text: "أحب التفاعل مع الناس والحديث مع الغرباء", cat: "الانبساط" }, { text: "أميل لمسامحة الآخرين والتعاون معهم", cat: "المقبولية" }, { text: "أهتم جداً بالأفكار الفلسفية والخيالية والمعقدة", cat: "الانفتاح" }, { text: "أشعر بالقلق والتوتر بسهولة عند ضغط العمل", cat: "الاتزان" }, { text: "أحافظ على أغراضي ومنظم جداً في عملي", cat: "الضمير الحي" }, { text: "أشعر بالحيوية والنشاط في التجمعات الكبيرة", cat: "الانبساط" }, { text: "أثق في نوايا الناس من حولي", cat: "المقبولية" }, { text: "أستمتع بتجربة الأطعمة والأنشطة الجديدة والغريبة", cat: "الانفتاح" }, { text: "أفقد أعصابي أو أحزن بسرعة عند وقوع خطأ", cat: "الاتزان" }, { text: "لا أترك عملي حتى أتأكد من إنهاء كل تفاصيله", cat: "الضمير الحي" }, { text: "أفضل العمل الجماعي على العمل منفرداً", cat: "الانبساط" }, { text: "أحرص على ألا أجرح مشاعر الآخرين بكلامي", cat: "المقبولية" }, { text: "أقدر الفنون والموسيقى والجمال بشكل عميق", cat: "الانفتاح" }, { text: "أستطيع التحكم في مشاعري تحت الضغط الشديد", cat: "الاتزان" }, { text: "أضع خططاً واضحة ليومي وألتزم بها", cat: "الضمير الحي" }, { text: "أنا شخص اجتماعي وأحب أن أكون مركز الاهتمام", cat: "الانبساط" }, { text: "أميل لمساعدة الآخرين حتى لو على حساب وقتي", cat: "المقبولية" }, { text: "لدي خيال واسع وأفكر في احتمالات كثيرة", cat: "الانفتاح" }, { text: "نادراً ما أشعر بالاكتئاب أو الإحباط", cat: "الاتزان" }];
+        const LOGIC_QUESTIONS = [{ q: "إذا كان ثمن 3 أقلام هو 15 ريالاً، فكم ثمن 7 أقلام؟", options: ["30", "35", "40", "45"], correct: 1, type: "عددي" }, { q: "أكمل المتسلسلة: 2، 4، 8، 16، ...", options: ["20", "24", "32", "64"], correct: 2, type: "عددي" }, { q: "جميع الموظفين في الشركة (أ) يرتدون زياً أزرق. 'خالد' موظف في الشركة (أ). ما هي النتيجة المؤكدة؟", options: ["خالد يحب اللون الأزرق", "خالد يرتدي زياً أزرق", "كل من يرتدي الأزرق موظف في الشركة", "خالد يرتدي زياً أحمراً"], correct: 1, type: "لفظي" }, { q: "سعر منتج 200 ريال، حصل عليه خصم 20%. ما هو سعره الجديد؟", options: ["160", "180", "150", "140"], correct: 0, type: "عددي" }, { q: "كلمة 'إهمال' بالنسبة لـ 'فشل' مثل كلمة 'اجتهاد' بالنسبة لـ:", options: ["حظ", "نجاح", "تعب", "انتظار"], correct: 1, type: "لفظي" }, { q: "ما هو الرقم الذي يكمل النمط: 1، 3، 6، 10، 15، ...", options: ["18", "20", "21", "25"], correct: 2, type: "عددي" }, { q: "إذا كان 'عمر' أطول من 'سعيد'، و'سعيد' أطول من 'فهد'، فمن هو الأقصر؟", options: ["عمر", "سعيد", "فهد", "لا يمكن التحديد"], correct: 2, type: "لفظي" }, { q: "سيارة تسير بسرعة 60 كم/ساعة، كم تقطع في ساعتين ونصف؟", options: ["120 كم", "150 كم", "180 كم", "200 كم"], correct: 1, type: "عددي" }, { q: "أي الكلمات التالية هي الكلمة الشاذة: (تفاح، برتقال، جزر، عنب)؟", options: ["تفاح", "برتقال", "جزر", "عنب"], correct: 2, type: "لفظي" }, { q: "المعدن بالنسبة لـ 'الصلابة' مثل السائل بالنسبة لـ:", options: ["البرودة", "الجريان", "اللون", "الوزن"], correct: 1, type: "لفظي" }];
+        
+        // --- بيانات SJT (تمت إضافة 5 أسئلة جديدة ليصبح الإجمالي 10) ---
+        const SJT_QUESTIONS = [
+            { scenario: "لاحظت أن زميلك المقرب في العمل يرتكب خطأً متكرراً في التقارير قد يؤثر على نتائج القسم، ماذا تفعل؟", options: [{ text: "تتجاهل الأمر حفاظاً على علاقتك به.", score: 0 }, { text: "تتحدث معه بشكل خاص، توضح له الخطأ، وتعرض عليه المساعدة.", score: 10 }, { text: "تبلغ المدير فوراً لضمان عدم تحميلك مسؤولية أخطائه.", score: 5 }] },
+            { scenario: "لديك موعد نهائي لتسليم مشروع غداً، وفي نهاية اليوم طلب منك مديرك بشكل عاجل تحضير عرض تقديم لعميل مهم. كيف تتصرف؟", options: [{ text: "تعتذر للمدير لأنك مشغول بالمشروع.", score: 0 }, { text: "توافق فوراً وتعمل وقتاً إضافياً لتنهي المهمتين.", score: 10 }, { text: "تطلب من المدير مساعدتك في ترتيب الأولويات لضمان الدقة.", score: 8 }] },
+            { scenario: "قام عميل بالاتصال بك وهو غاضب جداً بسبب تأخر الخدمة، وبدأ في التحدث بلهجة حادة. كيف تتعامل معه؟", options: [{ text: "تطلب منه الهدوء وتخبره أن الصراخ لن يحل المشكلة.", score: 2 }, { text: "تستمع له بهدوء، تعتذر، وتعده بمتابعة الأمر فوراً.", score: 10 }, { text: "تحوله فوراً لمديرك لأنك غير مسؤول.", score: 4 }] },
+            { scenario: "اكتشفت بعد إرسال بريد رسمي لمدير الإدارة أنك أرفقت ملفاً خاطئاً يحتوي على معلومات غير دقيقة. ماذا تفعل؟", options: [{ text: "تنتظر لترى إذا كان سيلحظ الخطأ.", score: 0 }, { text: "ترسل بريداً ثانياً فوراً بالملف الصحيح مع اعتذار.", score: 10 }, { text: "تحاول حذف الرسالة من بريده قبل أن يراها.", score: 3 }] },
+            { scenario: "أثناء اجتماع الفريق، قام أحد الزملاء بانتقاد فكرتك بشكل علني وقاسٍ. كيف ترد؟", options: [{ text: "ترد عليه بنفس الأسلوب لتدافع عن كرامتك.", score: 0 }, { text: "تطلب منه توضيح نقاط النقد بشكل موضوعي وتناقشه بهدوء.", score: 10 }, { text: "تنسحب من النقاش وتشتكيه للمدير بعد الاجتماع.", score: 4 }] },
+            // الأسئلة الجديدة (6-10)
+            { scenario: "وجدت زميلين في مكتبك يتشاجران بصوت عالٍ حول تقسيم المهام، مما أدى لتعطل العمل. ما هو موقفك؟", options: [{ text: "تتركهما وشأنهما وتستمر في عملك، فالأمر لا يخصك.", score: 0 }, { text: "تحاول التدخل لتهدئة الموقف واقتراح حل وسط يرضي الطرفين.", score: 10 }, { text: "تذهب فوراً لإبلاغ الأمن أو الموارد البشرية لفض النزاع.", score: 6 }] },
+            { scenario: "اكتشفت بالصدفة أن أحد زملائك يستخدم موارد الشركة (مثل الطابعة أو الأدوات) لأغراض تجارية خاصة به خارج العمل. ماذا تفعل؟", options: [{ text: "تخبره بأنك اكتشفت الأمر وتنصحه بالتوقف فوراً لأن ذلك يخالف السياسات.", score: 10 }, { text: "تتجاهل الأمر تماماً، فكل شخص حر في تصرفاته.", score: 0 }, { text: "تذهب للمدير سراً وتبلغه بما رأيت دون مواجهة الزميل.", score: 7 }] },
+            { scenario: "فشلت في إنجاز مهمة هامة في وقتها المحدد مما تسبب في إحراج لفريقك أمام الإدارة. كيف تتعامل مع الموقف؟", options: [{ text: "تبحث عن أعذار خارجية (مثل ضغط العمل أو ضعف التنسيق) لتبرير التأخير.", score: 2 }, { text: "تتحمل المسؤولية كاملة، وتعتذر للفريق، وتقدم خطة لتعويض التأخير فوراً.", score: 10 }, { text: "تلتزم الصمت وتأمل أن يمر الموقف دون أن يلاحظ أحد تقصيرك.", score: 0 }] },
+            { scenario: "طلب منك المدير القيام بمهمة تشعر أنها غير أخلاقية أو تتلاعب بالبيانات لإظهار نتائج أفضل للقسم. ماذا تفعل؟", options: [{ text: "تنفذ المهمة فوراً، فالمدير هو المسؤول عن القرار النهائي.", score: 0 }, { text: "تناقش المدير بهدوء حول مخاوفك المهنية وتقترح طريقة قانونية وصادقة لعرض النتائج.", score: 10 }, { text: "ترفض المهمة بحدة وتتهم المدير بالفساد أمام الزملاء.", score: 3 }] },
+            { scenario: "تم تعيينك قائداً لفريق عمل جديد، ووجدت أن الأعضاء لا يثقون ببعضهم البعض والإنتاجية ضعيفة. ما هي خطوتك الأولى؟", options: [{ text: "تفرض قواعد صارمة وعقوبات على أي شخص لا يلتزم بالإنتاجية المطلوبة.", score: 3 }, { text: "تعقد اجتماعاً مفتوحاً لبناء الثقة، وتستمع لمخاوف الجميع، وتحدد أهدافاً مشتركة واضحة.", score: 10 }, { text: "تقوم بتغيير معظم أعضاء الفريق واستبدالهم بأشخاص آخرين تثق بهم.", score: 0 }] }
         ];
 
-        // 2. بيانات Big Five (كما هي)
-        const BIG5_QUESTIONS = [
-            { text: "أقوم بإنجاز المهام والواجبات بدقة وإتقان", cat: "الضمير الحي" },
-            { text: "أحب التفاعل مع الناس والحديث مع الغرباء", cat: "الانبساط" },
-            { text: "أميل لمسامحة الآخرين والتعاون معهم", cat: "المقبولية" },
-            { text: "أهتم جداً بالأفكار الفلسفية والخيالية والمعقدة", cat: "الانفتاح" },
-            { text: "أشعر بالقلق والتوتر بسهولة عند ضغط العمل", cat: "الاتزان" },
-            { text: "أحافظ على أغراضي ومنظم جداً في عملي", cat: "الضمير الحي" },
-            { text: "أشعر بالحيوية والنشاط في التجمعات الكبيرة", cat: "الانبساط" },
-            { text: "أثق في نوايا الناس من حولي", cat: "المقبولية" },
-            { text: "أستمتع بتجربة الأطعمة والأنشطة الجديدة والغريبة", cat: "الانفتاح" },
-            { text: "أفقد أعصابي أو أحزن بسرعة عند وقوع خطأ", cat: "الاتزان" },
-            { text: "لا أترك عملي حتى أتأكد من إنهاء كل تفاصيله", cat: "الضمير الحي" },
-            { text: "أفضل العمل الجماعي على العمل منفرداً", cat: "الانبساط" },
-            { text: "أحرص على ألا أجرح مشاعر الآخرين بكلامي", cat: "المقبولية" },
-            { text: "أقدر الفنون والموسيقى والجمال بشكل عميق", cat: "الانفتاح" },
-            { text: "أستطيع التحكم في مشاعري تحت الضغط الشديد", cat: "الاتزان" },
-            { text: "أضع خططاً واضحة ليومي وألتزم بها", cat: "الضمير الحي" },
-            { text: "أنا شخص اجتماعي وأحب أن أكون مركز الاهتمام", cat: "الانبساط" },
-            { text: "أميل لمساعدة الآخرين حتى لو على حساب وقتي", cat: "المقبولية" },
-            { text: "لدي خيال واسع وأفكر في احتمالات كثيرة", cat: "الانفتاح" },
-            { text: "نادراً ما أشعر بالاكتئاب أو الإحباط", cat: "الاتزان" }
-        ];
+        const INTEL_QUESTIONS = [{ text: "يسهل علي تأليف القصص", cat: "لغوي" }, { text: "أنصت إلى الكلمات التي يستخدمها الناس", cat: "لغوي" }, { text: "استمتع بحل الكلمات المتقاطعة", cat: "لغوي" }, { text: "يسهل علي تذكر أسماء الناس", cat: "لغوي" }, { text: "يمكنني اقناع الآخرين", cat: "لغوي" }, { text: "أستمتع بالألعاب المنطقية", cat: "منطقي" }, { text: "أستطيع الحساب في ذهني", cat: "منطقي" }, { text: "أحب تنظيم الأشياء في فئات", cat: "منطقي" }, { text: "أهتم بالاكتشافات العلمية", cat: "منطقي" }, { text: "أستمتع بحل المشكلات المعقدة", cat: "منطقي" }, { text: "أحتاج دائماً للنقر بأصابعي", cat: "موسيقي" }, { text: "أستطيع تمييز الإيقاعات", cat: "موسيقي" }, { text: "أحب الاستماع للموسيقى", cat: "موسيقي" }, { text: "يمكنني العزف أو الغناء", cat: "موسيقي" }, { text: "أتذكر ألحان الأغاني", cat: "موسيقي" }, { text: "أستمتع بالأنشطة البدنية", cat: "حركي" }, { text: "أجد صعوبة في الجلوس طويلاً", cat: "حركي" }, { text: "أحب العمل بيدي", cat: "حركي" }, { text: "أستخدم لغة جسدي بكثرة", cat: "حركي" }, { text: "أفضل ممارسة الأشياء بنفسي", cat: "حركي" }, { text: "أحب رسم المخططات", cat: "بصري" }, { text: "أستمتع بالألغاز البصرية", cat: "بصري" }, { text: "تخيل الأشياء والمباني", cat: "بصري" }, { text: "أحب استخدام الألوان", cat: "بصري" }, { text: "أستطيع قراءة الخرائط", cat: "بصري" }, { text: "أفضل العمل في مجموعات", cat: "اجتماعي" }, { text: "يلجأ إليّ أصدقائي للنصيحة", cat: "اجتماعي" }, { text: "أستطيع قراءة مشاعر الآخرين", cat: "اجتماعي" }, { text: "أحب تكوين صداقات جديدة", cat: "اجتماعي" }, { text: "أستمتع بتعليم الآخرين", cat: "اجتماعي" }, { text: "أفضل العمل بمفردي", cat: "ذاتي" }, { text: "أعرف نقاط قوتي وضعفي", cat: "ذاتي" }, { text: "أفكر في أهدافي المستقبلية", cat: "ذاتي" }, { text: "أحب تدوين يومياتي", cat: "ذاتي" }, { text: "أعتمد على حدسي", cat: "ذاتي" }];
+        const TYPING_STAGES = [{ lang: 'العربية', text: "تعد تقنية المعلومات الركيزة الأساسية في بناء المدن الذكية، حيث تساهم في تحسين جودة الحياة وتسهيل الخدمات الحكومية من خلال الربط الرقمي والذكاء الاصطناعي الذي يخدم كافة أفراد المجتمع بفعالية.", dir: 'rtl' }, { lang: 'English', text: "Digital transformation is reshaping the global economy by creating new opportunities for innovation and growth. Mastering keyboard skills is essential for productivity in today's fast-paced environment.", dir: 'ltr' }];
 
-        // 3. بيانات الاستدلال المنطقي (العددي واللفظي) - جديد
-        const LOGIC_QUESTIONS = [
-            { q: "إذا كان ثمن 3 أقلام هو 15 ريالاً، فكم ثمن 7 أقلام؟", options: ["30", "35", "40", "45"], correct: 1, type: "عددي" },
-            { q: "أكمل المتسلسلة: 2، 4، 8، 16، ...", options: ["20", "24", "32", "64"], correct: 2, type: "عددي" },
-            { q: "جميع الموظفين في الشركة (أ) يرتدون زياً أزرق. 'خالد' موظف في الشركة (أ). ما هي النتيجة المؤكدة؟", options: ["خالد يحب اللون الأزرق", "خالد يرتدي زياً أزرق", "كل من يرتدي الأزرق موظف في الشركة", "خالد يرتدي زياً أحمراً"], correct: 1, type: "لفظي" },
-            { q: "سعر منتج 200 ريال، حصل عليه خصم 20%. ما هو سعره الجديد؟", options: ["160", "180", "150", "140"], correct: 0, type: "عددي" },
-            { q: "كلمة 'إهمال' بالنسبة لـ 'فشل' مثل كلمة 'اجتهاد' بالنسبة لـ:", options: ["حظ", "نجاح", "تعب", "انتظار"], correct: 1, type: "لفظي" },
-            { q: "ما هو الرقم الذي يكمل النمط: 1، 3، 6، 10، 15، ...", options: ["18", "20", "21", "25"], correct: 2, type: "عددي" },
-            { q: "إذا كان 'عمر' أطول من 'سعيد'، و'سعيد' أطول من 'فهد'، فمن هو الأقصر؟", options: ["عمر", "سعيد", "فهد", "لا يمكن التحديد"], correct: 2, type: "لفظي" },
-            { q: "سيارة تسير بسرعة 60 كم/ساعة، كم تقطع في ساعتين ونصف؟", options: ["120 كم", "150 كم", "180 كم", "200 كم"], correct: 1, type: "عددي" },
-            { q: "أي الكلمات التالية هي الكلمة الشاذة: (تفاح، برتقال، جزر، عنب)؟", options: ["تفاح", "برتقال", "جزر", "عنب"], correct: 2, type: "لفظي" },
-            { q: "المعدن بالنسبة لـ 'الصلابة' مثل السائل بالنسبة لـ:", options: ["البرودة", "الجريان", "اللون", "الوزن"], correct: 1, type: "لفظي" }
-        ];
-
-        // 4. بيانات الذكاءات (كما هي)
-        const INTEL_QUESTIONS = [
-            { text: "يسهل علي تأليف القصص", cat: "لغوي" },
-            { text: "أنصت إلى الكلمات التي يستخدمها الناس بدقة", cat: "لغوي" },
-            { text: "استمتع بحل الكلمات المتقاطعة والألغاز الكلامية", cat: "لغوي" },
-            { text: "يسهل علي تذكر أسماء الناس والأماكن والتواريخ", cat: "لغوي" },
-            { text: "يمكنني اقناع الآخرين برأيي بسهولة", cat: "لغوي" },
-            { text: "أستمتع بالألعاب التي تعتمد على المنطق والأرقام", cat: "منطقي" },
-            { text: "أستطيع إجراء العمليات الحسابية في ذهني بسرعة", cat: "منطقي" },
-            { text: "أحب تنظيم الأشياء في فئات أو تصنيفات واضحة", cat: "منطقي" },
-            { text: "أهتم بالاكتشافات العلمية والنظريات الجديدة", cat: "منطقي" },
-            { text: "أستمتع بحل المشكلات المعقدة والتفكير المتسلسل", cat: "منطقي" },
-            { text: "أحتاج دائماً للنقر بأصابعي أو إصدار إيقاعات", cat: "موسيقي" },
-            { text: "أستطيع تمييز الإيقاعات والألحان بسهولة", cat: "موسيقي" },
-            { text: "أحب الاستماع للموسيقى أثناء الدراسة أو العمل", cat: "موسيقي" },
-            { text: "يمكنني العزف على آلة أو الغناء بشكل جيد", cat: "موسيقي" },
-            { text: "أتذكر ألحان الأغاني والمقطوعات بسرعة", cat: "موسيقي" },
-            { text: "أستمتع بالأنشطة البدنية مثل الرياضة أو الحركة", cat: "حركي" },
-            { text: "أجد صعوبة في الجلوس لفترات طويلة دون حركة", cat: "حركي" },
-            { text: "أحب العمل بيدي في أشياء مثل الفك والتركيب", cat: "حركي" },
-            { text: "أستخدم لغة جسدي بكثرة للتعبير عن مشاعري", cat: "حركي" },
-            { text: "أفضل ممارسة الأشياء بنفسي بدلاً من القراءة عنها", cat: "حركي" },
-            { text: "أحب رسم المخططاتا لتوضيح أفكاري", cat: "بصري" },
-            { text: "أستمتع بالألغاز البصرية والمتاهات والخرائط", cat: "بصري" },
-            { text: "يمكنني تخيل الأشياء والمباني في ذهني بسهولة", cat: "بصري" },
-            { text: "أحب استخدام الألوان في تنظيم أشيائي", cat: "بصري" },
-            { text: "أستطيع قراءة الخرائط بوضوح", cat: "بصري" },
-            { text: "أفضل العمل في مجموعات", cat: "اجتماعي" },
-            { text: "يلجأ إليّ أصدقائي لطلب النصيحة", cat: "اجتماعي" },
-            { text: "أستطيع قراءة مشاعر الآخرين", cat: "اجتماعي" },
-            { text: "أحب تكوين صداقات جديدة", cat: "اجتماعي" },
-            { text: "أستمتع بتعليم الآخرين", cat: "اجتماعي" },
-            { text: "أفضل العمل بمفردي", cat: "ذاتي" },
-            { text: "أعرف نقاط قوتي وضعفي", cat: "ذاتي" },
-            { text: "أقضي وقتاً طويلاً في التفكير في أهدافي", cat: "ذاتي" },
-            { text: "أحب تدوين يومياتي", cat: "ذاتي" },
-            { text: "أعتمد على حدسي ومشاعري", cat: "ذاتي" }
-        ];
-
-        const TYPING_STAGES = [
-            { lang: 'العربية', text: "تعد تقنية المعلومات الركيزة الأساسية في بناء المدن الذكية، حيث تساهم في تحسين جودة الحياة وتسهيل الخدمات الحكومية من خلال الربط الرقمي والذكاء الاصطناعي الذي يخدم كافة أفراد المجتمع بفعالية.", dir: 'rtl' },
-            { lang: 'English', text: "Digital transformation is reshaping the global economy by creating new opportunities for innovation and growth. Mastering keyboard skills is essential for productivity in today's fast-paced environment.", dir: 'ltr' }
-        ];
-
-        // --- الحالة العامة للمنصة ---
+        // --- إدارة حالة التطبيق ---
         let mbtiIdx = 0, mbtiAnswers = [];
         let big5Idx = 0, big5Scores = { "الضمير الحي":0, "الانبساط":0, "المقبولية":0, "الانفتاح":0, "الاتزان":0 };
         let intelIdx = 0, intelScores = { "لغوي":0, "منطقي":0, "موسيقي":0, "حركي":0, "بصري":0, "اجتماعي":0, "ذاتي":0 };
         let logicIdx = 0, logicResults = { correct: 0, total: 0, types: { "عددي": 0, "لفظي": 0 } };
+        let sjtIdx = 0, sjtTotalScore = 0;
         let typingIdx = 0, typingTimerInterval, timerActive = false, timeLeft = 60, startTime, typingResults = [];
 
-        // --- إدارة التبويبات ---
-        function showTab(tabId) {
+        function showTab(id) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active-tab'));
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active-tab');
+            document.getElementById(id).classList.add('active');
+            document.getElementById('btn-' + id).classList.add('active-tab');
         }
 
-        // --- منطق MBTI ---
+        // --- منطق عرض MBTI ---
         function renderMBTI() {
             const container = document.getElementById('mbti-card');
             if (mbtiIdx < MBTI_QUESTIONS.length) {
                 const q = MBTI_QUESTIONS[mbtiIdx];
-                const progress = (mbtiIdx / MBTI_QUESTIONS.length) * 100;
-                container.innerHTML = `
-                    <h2 class="text-xl font-bold mb-4 text-center">نمط الشخصية MBTI</h2>
-                    <div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-blue-600 h-2 rounded-full transition-all" style="width:${progress}%"></div></div>
-                    <button onclick="handleMBTI(0)" class="option-btn w-full p-4 mb-4 bg-white rounded-xl shadow-sm font-bold">${q[0]}</button>
-                    <button onclick="handleMBTI(1)" class="option-btn w-full p-4 bg-white rounded-xl shadow-sm font-bold">${q[1]}</button>
-                `;
+                container.innerHTML = `<h2 class="text-xl font-bold mb-4 text-center">نمط الشخصية MBTI</h2><div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-blue-600 h-2 rounded-full" style="width:${(mbtiIdx/MBTI_QUESTIONS.length)*100}%"></div></div><button onclick="handleMBTI(0)" class="option-btn w-full p-4 mb-4 bg-white rounded-xl shadow-sm font-bold">${q[0]}</button><button onclick="handleMBTI(1)" class="option-btn w-full p-4 bg-white rounded-xl shadow-sm font-bold">${q[1]}</button>`;
             } else { showMBTIResult(); }
         }
         function handleMBTI(c) { mbtiAnswers.push(MBTI_QUESTIONS[mbtiIdx][2][c]); mbtiIdx++; renderMBTI(); }
@@ -212,20 +105,12 @@
             document.getElementById('mbti-card').innerHTML = `<div class="text-center py-10"><h3 class="text-xl font-bold">نمطك هو:</h3><div class="text-7xl font-black text-blue-600 my-6">${res}</div><button onclick="location.reload()" class="bg-slate-800 text-white px-8 py-3 rounded-full">إعادة</button></div>`;
         }
 
-        // --- منطق Big Five ---
+        // --- منطق عرض Big Five ---
         function renderBig5() {
             const container = document.getElementById('big5-card');
             if (big5Idx < BIG5_QUESTIONS.length) {
                 const q = BIG5_QUESTIONS[big5Idx];
-                const progress = (big5Idx / BIG5_QUESTIONS.length) * 100;
-                container.innerHTML = `
-                    <h2 class="text-xl font-bold mb-2 text-center text-violet-800">السمات الخمس الكبرى</h2>
-                    <div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-violet-600 h-2 rounded-full" style="width:${progress}%"></div></div>
-                    <p class="text-2xl text-center font-bold mb-10">${q.text}</p>
-                    <div class="flex justify-between gap-2 max-w-sm mx-auto">
-                        ${[1,2,3,4,5].map(v => `<button onclick="handleBig5(${v})" class="w-12 h-12 rounded-full bg-violet-600 text-white font-bold">${v}</button>`).join('')}
-                    </div>
-                `;
+                container.innerHTML = `<h2 class="text-xl font-bold mb-2 text-center text-violet-800">السمات الخمس الكبرى</h2><div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-violet-600 h-2 rounded-full" style="width:${(big5Idx/BIG5_QUESTIONS.length)*100}%"></div></div><p class="text-2xl text-center font-bold mb-10">${q.text}</p><div class="flex justify-between gap-2 max-w-sm mx-auto">${[1,2,3,4,5].map(v => `<button onclick="handleBig5(${v})" class="w-12 h-12 rounded-full bg-violet-600 text-white font-bold">${v}</button>`).join('')}</div>`;
             } else { showBig5Result(); }
         }
         function handleBig5(v) { let p = v; if (BIG5_QUESTIONS[big5Idx].cat === "الاتزان" && (big5Idx === 4 || big5Idx === 9)) p = 6-v; big5Scores[BIG5_QUESTIONS[big5Idx].cat] += p; big5Idx++; renderBig5(); }
@@ -235,81 +120,80 @@
             document.getElementById('big5-card').innerHTML = h + `<button onclick="location.reload()" class="w-full bg-violet-800 text-white p-3 rounded-lg mt-4">إعادة</button>`;
         }
 
-        // --- منطق الاستدلال المنطقي (الجديد) ---
+        // --- منطق عرض المنطق ---
         function renderLogic() {
             const container = document.getElementById('logic-card');
             if (logicIdx < LOGIC_QUESTIONS.length) {
                 const q = LOGIC_QUESTIONS[logicIdx];
-                const progress = (logicIdx / LOGIC_QUESTIONS.length) * 100;
-                container.innerHTML = `
-                    <h2 class="text-xl font-black text-orange-600 text-center mb-2">اختبار الاستدلال المنطقي</h2>
-                    <div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-orange-500 h-2 rounded-full" style="width:${progress}%"></div></div>
-                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold mb-4 inline-block">نوع السؤال: ${q.type}</span>
-                    <p class="text-xl font-bold text-slate-800 mb-8 leading-relaxed">${q.q}</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${q.options.map((opt, i) => `
-                            <button onclick="handleLogic(${i})" class="option-btn bg-white border-2 border-slate-100 p-4 rounded-xl font-bold hover:border-orange-500 hover:text-orange-600 transition-all text-right">${opt}</button>
-                        `).join('')}
-                    </div>
-                `;
+                container.innerHTML = `<h2 class="text-xl font-black text-orange-600 text-center mb-2">اختبار الاستدلال المنطقي</h2><div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-orange-500 h-2 rounded-full" style="width:${(logicIdx/LOGIC_QUESTIONS.length)*100}%"></div></div><p class="text-xl font-bold text-slate-800 mb-8">${q.q}</p><div class="grid grid-cols-1 md:grid-cols-2 gap-4">${q.options.map((opt, i) => `<button onclick="handleLogic(${i})" class="option-btn bg-white border-2 p-4 rounded-xl font-bold text-right">${opt}</button>`).join('')}</div>`;
             } else { showLogicResult(); }
         }
-        function handleLogic(choice) {
-            if (choice === LOGIC_QUESTIONS[logicIdx].correct) {
-                logicResults.correct++;
-                logicResults.types[LOGIC_QUESTIONS[logicIdx].type]++;
-            }
-            logicIdx++; logicResults.total++; renderLogic();
-        }
+        function handleLogic(choice) { if (choice === LOGIC_QUESTIONS[logicIdx].correct) { logicResults.correct++; logicResults.types[LOGIC_QUESTIONS[logicIdx].type]++; } logicIdx++; logicResults.total++; renderLogic(); }
         function showLogicResult() {
             const score = Math.round((logicResults.correct / logicResults.total) * 100);
-            document.getElementById('logic-card').innerHTML = `
-                <div class="text-center py-6">
-                    <h3 class="text-2xl font-black text-slate-800 mb-6">نتيجة اختبار المنطق</h3>
-                    <div class="inline-block p-10 rounded-full border-8 border-orange-500 text-5xl font-black text-orange-600 mb-8">${score}%</div>
-                    <div class="text-right space-y-4 max-w-sm mx-auto">
-                        <div class="flex justify-between"><span>الاستدلال العددي:</span> <span class="font-bold">${logicResults.types['عددي']}/5</span></div>
-                        <div class="flex justify-between"><span>الاستدلال اللفظي:</span> <span class="font-bold">${logicResults.types['لفظي']}/5</span></div>
+            document.getElementById('logic-card').innerHTML = `<div class="text-center py-6"><h3 class="text-2xl font-black mb-6">نتيجة المنطق</h3><div class="inline-block p-10 rounded-full border-8 border-orange-500 text-5xl font-black text-orange-600 mb-8">${score}%</div><button onclick="location.reload()" class="mt-8 block w-full bg-orange-600 text-white p-3 rounded-full font-bold">إعادة</button></div>`;
+        }
+
+        // --- منطق عرض SJT (10 أسئلة) ---
+        function renderSJT() {
+            const container = document.getElementById('sjt-card');
+            if (sjtIdx < SJT_QUESTIONS.length) {
+                const q = SJT_QUESTIONS[sjtIdx];
+                const progress = (sjtIdx / SJT_QUESTIONS.length) * 100;
+                container.innerHTML = `
+                    <h2 class="text-xl font-black text-red-600 text-center mb-2">اختبار الحكم الموقفي الإداري</h2>
+                    <div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-red-600 h-2 rounded-full" style="width:${progress}%"></div></div>
+                    <div class="bg-red-50 p-6 rounded-2xl mb-8 border-r-4 border-red-600">
+                        <p class="text-lg font-bold text-slate-800 leading-relaxed italic">" ${q.scenario} "</p>
                     </div>
-                    <button onclick="location.reload()" class="mt-8 bg-orange-600 text-white px-10 py-3 rounded-full font-bold">إعادة الاختبار</button>
+                    <div class="space-y-4">
+                        ${q.options.map((opt, i) => `
+                            <button onclick="handleSJT(${opt.score})" class="option-btn w-full bg-white border-2 border-slate-100 p-5 rounded-xl font-bold text-right hover:border-red-500 hover:text-red-700 transition-all shadow-sm">
+                                ${opt.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p class="text-center text-xs text-slate-400 mt-6">الموقف ${sjtIdx + 1} من ${SJT_QUESTIONS.length}</p>
+                `;
+            } else { showSJTResult(); }
+        }
+        function handleSJT(score) { sjtTotalScore += score; sjtIdx++; renderSJT(); }
+        function showSJTResult() {
+            const maxScore = SJT_QUESTIONS.length * 10;
+            const percentage = Math.round((sjtTotalScore / maxScore) * 100);
+            let feedback = percentage >= 85 ? "رائع! لديك نضج إداري وحكمة في اتخاذ القرارات وحل النزاعات." : percentage >= 60 ? "أداؤك جيد جداً، أنت تمتلك مهارات قيادية وتواصل فعالة مع الفريق." : "تحتاج للعمل أكثر على مهارات إدارة المواقف الضابطة والذكاء الاجتماعي المهني.";
+            
+            document.getElementById('sjt-card').innerHTML = `
+                <div class="text-center py-6">
+                    <h3 class="text-2xl font-black text-slate-800 mb-6">نتيجة التصرف الإداري الشاملة</h3>
+                    <div class="text-6xl font-black text-red-600 mb-4">${percentage}%</div>
+                    <p class="text-slate-600 font-bold mb-8 px-4 leading-relaxed">${feedback}</p>
+                    <button onclick="location.reload()" class="bg-red-600 text-white px-10 py-3 rounded-full font-bold shadow-lg">إعادة الاختبار</button>
                 </div>
             `;
         }
 
-        // --- منطق الذكاءات ---
+        // --- منطق عرض الذكاءات ---
         function renderIntel() {
             const container = document.getElementById('intel-card');
             if (intelIdx < INTEL_QUESTIONS.length) {
                 const q = INTEL_QUESTIONS[intelIdx];
-                const progress = (intelIdx / INTEL_QUESTIONS.length) * 100;
-                container.innerHTML = `
-                    <h2 class="text-xl font-bold mb-2 text-center text-emerald-700">الذكاءات المتعددة</h2>
-                    <div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-emerald-500 h-2 rounded-full" style="width:${progress}%"></div></div>
-                    <p class="text-2xl text-center font-bold mb-10">${q.text}</p>
-                    <div class="flex justify-between gap-1 max-w-sm mx-auto">
-                        ${[1,2,3,4,5].map(v => `<button onclick="handleIntel(${v})" class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold">${v}</button>`).join('')}
-                    </div>
-                `;
+                container.innerHTML = `<h2 class="text-xl font-bold mb-2 text-center text-emerald-700">الذكاءات المتعددة</h2><div class="bg-slate-100 h-2 rounded-full mb-8"><div class="bg-emerald-500 h-2 rounded-full" style="width:${(intelIdx/INTEL_QUESTIONS.length)*100}%"></div></div><p class="text-2xl text-center font-bold mb-10">${q.text}</p><div class="flex justify-between gap-1 max-w-sm mx-auto">${[1,2,3,4,5].map(v => `<button onclick="handleIntel(${v})" class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold">${v}</button>`).join('')}</div>`;
             } else { showIntelResult(); }
         }
         function handleIntel(v) { intelScores[INTEL_QUESTIONS[intelIdx].cat] += v; intelIdx++; renderIntel(); }
         function showIntelResult() {
             let h = `<h2 class="text-xl font-bold mb-6 text-center">توزيع ذكاءاتك</h2>`;
-            Object.entries(intelScores).forEach(([c, s]) => { h += `<div class="mb-4"><span>${c}</span> <div class="bg-slate-100 h-4 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full" style="width:${(s/25)*100}%"></div></div></div>`; });
+            Object.entries(intelScores).forEach(([c, s]) => { h += `<div class="mb-4"><span>${c}</span> <div class="bg-slate-100 h-4 rounded-full overflow-hidden"><div class="bg-violet-500 h-full" style="width:${(s/25)*100}%"></div></div></div>`; });
             document.getElementById('intel-card').innerHTML = h + `<button onclick="location.reload()" class="w-full bg-emerald-800 text-white p-3 rounded-lg mt-4">إعادة</button>`;
         }
 
-        // --- منطق الكتابة ---
+        // --- منطق عرض الكتابة ---
         function renderTyping() {
             const container = document.getElementById('typing-card');
             if (typingIdx < TYPING_STAGES.length) {
                 const s = TYPING_STAGES[typingIdx];
-                container.innerHTML = `
-                    <h2 class="text-xl font-bold mb-4">اختبار الكتابة (${s.lang})</h2>
-                    <div class="p-6 bg-slate-50 border rounded-xl mb-6 text-lg select-none">${s.text}</div>
-                    <textarea id="type-input" oninput="processTyping(this)" class="w-full p-4 border-2 rounded-xl text-lg h-32 focus:border-indigo-500 outline-none" dir="${s.dir}" placeholder="اكتب هنا..."></textarea>
-                    <div id="timer" class="text-orange-600 font-bold mt-2">الوقت: 60s</div>
-                `;
+                container.innerHTML = `<h2 class="text-xl font-bold mb-4">اختبار الكتابة (${s.lang})</h2><div class="p-6 bg-slate-50 border rounded-xl mb-6 text-lg select-none">${s.text}</div><textarea id="type-input" oninput="processTyping(this)" class="w-full p-4 border-2 rounded-xl text-lg h-32 focus:border-indigo-500 outline-none" dir="${s.dir}" placeholder="اكتب هنا..."></textarea><div id="timer" class="text-orange-600 font-bold mt-2">الوقت: 60s</div>`;
             } else { showTypingFinal(); }
         }
         function processTyping(el) {
@@ -319,27 +203,23 @@
             }
             if (el.value.trim() === TYPING_STAGES[typingIdx].text.trim()) finishTypingStage();
         }
-        function finishTypingStage() {
-            clearInterval(typingTimerInterval); const userText = document.getElementById('type-input').value;
-            const wpm = Math.round((userText.length/5)/((new Date()-startTime)/60000)) || 0;
-            typingResults.push({lang: TYPING_STAGES[typingIdx].lang, wpm});
-            typingIdx++; timeLeft=60; timerActive=false; renderTyping();
-        }
+        function finishTypingStage() { clearInterval(typingTimerInterval); const userText = document.getElementById('type-input').value; const wpm = Math.round((userText.length/5)/((new Date()-startTime)/60000)) || 0; typingResults.push({lang: TYPING_STAGES[typingIdx].lang, wpm}); typingIdx++; timeLeft=60; timerActive=false; renderTyping(); }
         function showTypingFinal() {
             let h = `<h2 class="text-2xl font-bold text-center mb-6">نتائج الكتابة</h2>`;
             typingResults.forEach(r => { h += `<div class="p-4 bg-slate-50 rounded-lg mb-4 flex justify-between"><span>${r.lang}</span><b>${r.wpm} كلمة/دقيقة</b></div>`; });
             document.getElementById('typing-card').innerHTML = h + `<button onclick="location.reload()" class="w-full bg-indigo-600 text-white p-3 rounded-lg">إعادة</button>`;
         }
 
-        // تشغيل أولي
+        // تشغيل أولي لكافة الأقسام
         renderMBTI();
         renderBig5();
         renderIntel();
         renderLogic();
+        renderSJT();
         renderTyping();
     </script>
 
-   <footer class="bg-slate-900 text-white py-12 mt-12">
+  <footer class="bg-slate-900 text-white py-12 mt-12">
     <div class="container mx-auto px-4 text-center">
         <h3 class="text-2xl font-bold mb-4">هل ترغب في بناء أدوات مماثلة؟</h3>
         <p class="text-slate-400 mb-8">أنا متاح للمشاريع الجديدة والاستشارات التقنية</p>
@@ -365,10 +245,9 @@
         </div>
 
         <div class="mt-12 pt-8 border-t border-slate-800 text-slate-500 text-sm">
-            <p>© 2025 جميع الحقوق محفوظة - تم التطوير بواسطة <span class="text-white font-bold">Mr.Sha3ban</span></p>
+            <p>© 2025 جميع الحقوق محفوظة - تم التطوير بواسطة <span class="text-white font-bold">Mr. Sha3ban</span></p>
         </div>
     </div>
 </footer>
-
 </body>
 </html>
